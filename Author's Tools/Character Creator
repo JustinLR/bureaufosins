@@ -152,6 +152,4 @@ for label, field_type in labels.items():
         day.pack()
         date_entries[label] = (year, month, day)
 
-setup_menu()
-
 root.mainloop()
