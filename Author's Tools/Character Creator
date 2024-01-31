@@ -16,43 +16,6 @@ def update_widget_colors(widget, bg_color, fg_color):
         for child in widget.winfo_children():
             update_widget_colors(child, bg_color, fg_color)
 
-def update_window_color():
-    bg_color = colorchooser.askcolor(title="Choose background color")[1]
-    fg_color = colorchooser.askcolor(title="Choose text color")[1]
-    if bg_color and fg_color:
-        update_widget_colors(root, bg_color, fg_color)
-
-def reset_window_color():
-    update_widget_colors(root, DEFAULT_BG_COLOR, DEFAULT_FG_COLOR)
-
-def choose_color(label):
-    color_code = colorchooser.askcolor(title="Choose color")[1]
-    if color_code:
-        color_labels[label].config(bg=color_code)
-        color_values[label] = color_code
-
-def close_application():
-    root.destroy()
-
-def setup_menu():
-    # Create a menu bar
-    menubar = tk.Menu(root)
-
-    # Create a 'File' menu
-    file_menu = tk.Menu(menubar, tearoff=0)
-    file_menu.add_command(label="Export to PDF", command=on_submit)
-    file_menu.add_command(label="Close", command=close_application)
-    menubar.add_cascade(label="File", menu=file_menu)
-
-    # Create an 'Options' menu
-    options_menu = tk.Menu(menubar, tearoff=0)
-    options_menu.add_command(label="Change Window Colors", command=update_window_color)
-    options_menu.add_command(label="Reset Window Colors", command=reset_window_color)
-    menubar.add_cascade(label="Options", menu=options_menu)
-
-    # Display the menu bar
-    root.config(menu=menubar)
-
 def get_character_details():
     character = {}
     for label, widget in entries.items():
