@@ -1,3 +1,4 @@
+# https://zzzcode.ai/code-refactor?id=e0a04e21-f42b-48b2-9d9f-2345cc1896f7
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog, colorchooser, Checkbutton, IntVar
 from fpdf import FPDF
