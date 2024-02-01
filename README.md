@@ -1,8 +1,4 @@
-Certainly, here's the revised README with "Authors Toolbox" placed under "Tools," and the rest of the tools unchanged:
-
 # Bureau of Sins
-
-![Bureau of Sins Logo](https://your-repo-url.com/bureau-of-sins-logo.png)
 
 Welcome to Bureau of Sins, your repository for a collection of powerful authoring tools designed to streamline your creative process. Whether you're creating characters, managing book projects, summarizing content, or using any of our other tools, Bureau of Sins has what you need.
 
