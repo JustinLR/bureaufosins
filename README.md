@@ -1,16 +1,18 @@
-# Bureau of Sins - Author's Toolkit
+Certainly, here's the revised README with "Authors Toolbox" placed under "Tools," and the rest of the tools unchanged:
+
+# Bureau of Sins
 
 ![Bureau of Sins Logo](https://your-repo-url.com/bureau-of-sins-logo.png)
 
-Welcome to Bureau of Sins, your one-stop repository for a suite of tools designed to assist authors in their creative endeavors. Whether you're crafting compelling characters, managing your book projects, enhancing your writing skills, or summarizing your work, Bureau of Sins has you covered.
+Welcome to Bureau of Sins, your repository for a collection of powerful authoring tools designed to streamline your creative process. Whether you're creating characters, managing book projects, summarizing content, or using any of our other tools, Bureau of Sins has what you need.
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Tools](#tools)
+  - [Authors Toolbox](#authors-toolbox)
   - [Character Creator](#character-creator)
   - [Book Hub](#book-hub)
-  - [Author’s Toolbox](#authors-toolbox)
   - [Summarizer](#summarizer)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
@@ -18,9 +20,13 @@ Welcome to Bureau of Sins, your one-stop repository for a suite of tools designe
 
 ## Introduction
 
-Bureau of Sins is a collection of utilities and tools designed to simplify and enhance the authoring process. These tools are created with the aim of assisting writers in various aspects of their work, from character development to book management and summarization.
+Bureau of Sins is a comprehensive repository housing various authoring tools. These tools are created with the aim of assisting writers in various aspects of their work, from character development to book management and summarization.
 
 ## Tools
+
+### Authors Toolbox
+
+Authors Toolbox is the central launcher for our suite of authoring tools. It provides a user-friendly interface to access all the tools in the Bureau of Sins suite, making it easy for writers to navigate and use the various utilities available.
 
 ### Character Creator
 
@@ -29,10 +35,6 @@ The Character Creator tool is a powerful utility for generating detailed and eng
 ### Book Hub
 
 Book Hub is your central hub for managing your book projects. Keep track of your writing progress, organize your chapters, and set goals to stay motivated throughout your writing journey.
-
-### Author’s Toolbox
-
-The Author’s Toolbox is a collection of writing resources and utilities to help you improve your writing skills. From grammar and style guides to writing prompts and inspiration, this toolbox has everything you need to hone your craft.
 
 ### Summarizer
 
@@ -49,7 +51,9 @@ To get started with Bureau of Sins, follow these steps:
 
 2. Explore the individual tool directories for detailed instructions and usage guidelines.
 
-3. Start using the tools to enhance your writing process.
+3. To launch the Authors Toolbox and access the suite of authoring tools, simply run `authors-toolbox.exe` or the appropriate command, as explained in the Authors Toolbox documentation.
+
+4. Start using the tools to enhance your writing process.
 
 ## Contributing
 
@@ -61,6 +65,6 @@ Bureau of Sins is open-source and licensed under the [MIT License](LICENSE). Fee
 
 ---
 
-We hope Bureau of Sins helps you on your writing journey. Happy writing!
+We hope Bureau of Sins and Authors Toolbox enhance your writing journey. Happy writing!
 
 [Visit our repository](https://github.com/your-username/bureau-of-sins)
