@@ -59,7 +59,7 @@ We welcome contributions from the community! If you have ideas for new tools or 
 
 ## License
 
-Bureau of Sins is open-source and licensed under the [MIT License](LICENSE). Feel free to use, modify, and share these tools as needed, but please provide attribution to the original repository and adhere to the license terms.
+Bureau of Sins is open-source and licensed under the [GPT-3.0 License](LICENSE). Feel free to use, modify, and share these tools as needed, but please provide attribution to the original repository and adhere to the license terms.
 
 ---
 
