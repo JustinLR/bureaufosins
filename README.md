@@ -1,5 +1,7 @@
 # Bureau of Sins
 
+![Bureau of Sins Logo](https://your-repo-url.com/bureau-of-sins-logo.png)
+
 Welcome to Bureau of Sins, your repository for a collection of powerful authoring tools designed to streamline your creative process. Whether you're creating characters, managing book projects, summarizing content, or using any of our other tools, Bureau of Sins has what you need.
 
 ## Table of Contents
@@ -42,7 +44,7 @@ To get started with Bureau of Sins, follow these steps:
 
 1. Clone the repository to your local machine:
    ```
-   git clone https://github.com/your-username/bureau-of-sins.git
+   git clone https://github.com/JustinLR/bureaufosins.git
    ```
 
 2. Explore the individual tool directories for detailed instructions and usage guidelines.
@@ -63,4 +65,4 @@ Bureau of Sins is open-source and licensed under the [MIT License](LICENSE). Fee
 
 We hope Bureau of Sins and Authors Toolbox enhance your writing journey. Happy writing!
 
-[Visit our repository](https://github.com/your-username/bureau-of-sins)
+[Visit our repository](https://github.com/JustinLR/bureaufosins)
