@@ -1,3 +1,4 @@
+# https://zzzcode.ai/code-refactor?id=dd243e09-a493-4148-b660-38674877713c
 import tkinter as tk
 from tkinter import ttk
 import webbrowser
