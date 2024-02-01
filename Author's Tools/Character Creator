@@ -1,13 +1,14 @@
-# https://zzzcode.ai/code-refactor?id=e0a04e21-f42b-48b2-9d9f-2345cc1896f7
-# https://zzzcode.ai/code-documentation?id=079840d9-1510-4ff2-810d-4eed5d9f28d8
+# Import the necessary libraries
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog, colorchooser, Checkbutton, IntVar
 from fpdf import FPDF
 import datetime
 
+# Define the default background and text colors for Tkinter
 DEFAULT_BG_COLOR = 'SystemButtonFace'  # Default background color for Tkinter
 DEFAULT_FG_COLOR = 'SystemButtonText'  # Default text color for Tkinter
 
+# Function to update the colors of a widget and its children
 def update_widget_colors(widget, bg_color, fg_color):
     try:
         widget.configure(bg=bg_color, fg=fg_color)
@@ -18,6 +19,7 @@ def update_widget_colors(widget, bg_color, fg_color):
         for child in widget.winfo_children():
             update_widget_colors(child, bg_color, fg_color)
 
+# Function to get the character details from the input fields
 def get_character_details():
     character = {}
     for label, widget in entries.items():
@@ -37,6 +39,7 @@ def get_character_details():
             character[label] = widget.get()  # Corrected line for Entry widgets
     return character
 
+# Function to export the character profile to a PDF file
 def export_to_pdf(character_profile):
     try:
         character_name = character_profile.get('Name', 'Unnamed_Character').replace(' ', '_')
@@ -61,13 +64,16 @@ def export_to_pdf(character_profile):
     except Exception as e:
         messagebox.showerror("Export Error", f"An error occurred: {e}")
 
+# Function to handle the submit button click event
 def on_submit():
     character_profile = get_character_details()
     export_to_pdf(character_profile)
 
+# Create the main Tkinter window
 root = tk.Tk()
 root.title("Character Profile Creator")
 
+# Create the main frame and canvas for scrolling
 frame = tk.Frame(root)
 frame.pack(fill=tk.BOTH, expand=True)
 canvas = tk.Canvas(frame)
@@ -79,6 +85,7 @@ canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('
 inner_frame = tk.Frame(canvas)
 canvas.create_window((0, 0), window=inner_frame, anchor="nw")
 
+# Define the labels and field types for the character profile
 labels = {
     "Name": "text", "Full Name": "text", "Nicknames/Aliases": "text", 
     "Age & Birthdate": "date", "Zodiac Sign": "dropdown", "Place of Birth": "text",
@@ -105,6 +112,7 @@ labels = {
 
 }
 
+# Define the dropdown options for certain fields
 dropdown_options = {
     "Zodiac Sign": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", 
                     "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
@@ -114,15 +122,16 @@ dropdown_options = {
 
 }
 
-# For Distinguishing Features
+# Define the distinguishing features and their associated variables
 distinguishing_features_list = ["Scar", "Tattoo", "Freckles", "Birthmark"]
 distinguishing_features = {feature: IntVar() for feature in distinguishing_features_list}
 
-entries = {}
-color_labels = {}
-color_values = {}
-date_entries = {}  # Add this line to define date_entries
+entries = {}  # Dictionary to store the input fields
+color_labels = {}  # Dictionary to store the color labels
+color_values = {}  # Dictionary to store the color values
+date_entries = {}  # Dictionary to store the date entries
 
+# Create the input fields based on the labels and field types
 for label, field_type in labels.items():
     tk.Label(inner_frame, text=label).pack()
     if field_type == "text":
@@ -153,5 +162,9 @@ for label, field_type in labels.items():
         month.pack()
         day.pack()
         date_entries[label] = (year, month, day)
+
+# Create the submit button
+submit_button = tk.Button(inner_frame, text="Submit", command=on_submit)
+submit_button.pack()
 
 root.mainloop()
