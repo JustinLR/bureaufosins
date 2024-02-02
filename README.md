@@ -28,7 +28,7 @@ The Author's Toolbox is designed to assist authors in their writing process. It 
 
 ### Character Creator
 
-The Character Creator tool is a powerful utility for generating detailed and engaging characters for your stories. With a few clicks, you can create unique and well-rounded characters, complete with names, backgrounds, and personalities.
+The character creator allows users to input various details about a character and export the character profile as a PDF.
 
 ### Book Hub
 
