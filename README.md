@@ -24,8 +24,7 @@ Bureau of Sins is a comprehensive repository housing various authoring tools. Th
 
 ### Authors Toolbox
 
-Authors Toolbox is the central launcher for our suite of authoring tools. It provides a user-friendly interface to access all the tools in the Bureau of Sins suite, making it easy for writers to navigate and use the various utilities available.
-
+The Author's Toolbox is a Python application designed to assist authors in their writing process. It provides various tools and features to help with character creation, book organization, and text summarization.
 ### Character Creator
 
 The Character Creator tool is a powerful utility for generating detailed and engaging characters for your stories. With a few clicks, you can create unique and well-rounded characters, complete with names, backgrounds, and personalities.
