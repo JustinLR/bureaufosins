@@ -1,14 +1,15 @@
-# Import the necessary libraries
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog, colorchooser, Checkbutton, IntVar
 from fpdf import FPDF
 import datetime
+import setuptools
 
-# Define the default background and text colors for Tkinter
-DEFAULT_BG_COLOR = 'SystemButtonFace'  # Default background color for Tkinter
-DEFAULT_FG_COLOR = 'SystemButtonText'  # Default text color for Tkinter
+entries = {}  # Define entries dictionary
+distinguishing_features = {}  # Define distinguishing_features dictionary
+date_entries = {}  # Define date_entries dictionary
+color_values = {}  # Define color_values dictionary
+color_labels = {}  # Define color_labels dictionary
 
-# Function to update the colors of a widget and its children
 def update_widget_colors(widget, bg_color, fg_color):
     try:
         widget.configure(bg=bg_color, fg=fg_color)
@@ -19,7 +20,6 @@ def update_widget_colors(widget, bg_color, fg_color):
         for child in widget.winfo_children():
             update_widget_colors(child, bg_color, fg_color)
 
-# Function to get the character details from the input fields
 def get_character_details():
     character = {}
     for label, widget in entries.items():
@@ -39,7 +39,6 @@ def get_character_details():
             character[label] = widget.get()  # Corrected line for Entry widgets
     return character
 
-# Function to export the character profile to a PDF file
 def export_to_pdf(character_profile):
     try:
         character_name = character_profile.get('Name', 'Unnamed_Character').replace(' ', '_')
@@ -64,107 +63,114 @@ def export_to_pdf(character_profile):
     except Exception as e:
         messagebox.showerror("Export Error", f"An error occurred: {e}")
 
-# Function to handle the submit button click event
+def choose_color(label):  # Remove 'parent' argument
+    color_code = colorchooser.askcolor(title="Choose color")[1]
+    if color_code:
+        color_labels[label].config(bg=color_code)
+        color_values[label] = color_code
+
 def on_submit():
     character_profile = get_character_details()
     export_to_pdf(character_profile)
 
-# Create the main Tkinter window
-root = tk.Tk()
-root.title("Character Profile Creator")
+def setup_character_creator(parent_frame):
+    label = tk.Label(parent_frame, text="Character Creator")
+    label.pack()
 
-# Create the main frame and canvas for scrolling
-frame = tk.Frame(root)
-frame.pack(fill=tk.BOTH, expand=True)
-canvas = tk.Canvas(frame)
-canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-canvas.configure(yscrollcommand=scrollbar.set)
-canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
-inner_frame = tk.Frame(canvas)
-canvas.create_window((0, 0), window=inner_frame, anchor="nw")
+    # Create a frame within the parent_frame
+    frame = tk.Frame(parent_frame)
+    frame.pack(fill=tk.BOTH, expand=True)
 
-# Define the labels and field types for the character profile
-labels = {
-    "Name": "text", "Full Name": "text", "Nicknames/Aliases": "text", 
-    "Age & Birthdate": "date", "Zodiac Sign": "dropdown", "Place of Birth": "text",
-    "Current Residence": "text", "Height (in inches)": "text", "Weight (in pounds)": "text",
-    "Build": "dropdown", "Eye Color": "color", "Hair Color": "color",
-    "Distinguishing Features": "checkbox", "Style of Dress": "dropdown", 
-    "Significant Physical Traits": "text", "Key Traits": "text", 
-    "Fears and Phobias": "text", "Hobbies and Interests": "text", 
-    "Habits or Behaviors": "text", "Strengths and Weaknesses": "text", 
-    "Mythological Influences on Personality": "text", "Moral Alignment": "text", 
-    "Communication Style": "text", "Family": "text", "Education and Training": "text", 
-    "Key Past Events": "text", "Social Status and Wealth": "dropdown", 
-    "Cultural Background & Mythological Lineage": "text", 
-    "Powers Specific to Greek Mythology": "text", "Limitations and Costs": "text", 
-    "Initial State": "text", "Evolution Throughout the Series": "text", 
-    "Goals and Motivations": "text", "Conflicts": "text", "Resolution": "text", 
-    "Ties to Mythological Themes": "text", "Destiny vs. Free Will": "text", 
-    "Key Relationships": "text", "Nature of Relationships": "text", 
-    "Changes Over Time": "text", "Mythological Alliances and Rivalries": "text", 
-    "Mentor Figures": "text", "Important Dialogue Quotations": "text", 
-    "Significant Moments or Scenes": "text", "Personal Belongings of Mythological Note": "text", 
-    "Prophecies or Oracles": "text", "Symbolism": "text", "Future Plot Ideas": "text"
-    # Add other fields as needed
+    # Create a canvas within the frame
+    canvas = tk.Canvas(frame, bg='blue')
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-}
+    # Create a scrollbar within the frame
+    scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-# Define the dropdown options for certain fields
-dropdown_options = {
-    "Zodiac Sign": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", 
-                    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
-    "Build": ["Slender", "Muscular", "Average", "Heavyset", "Athletic"],
-    "Style of Dress": ["Formal", "Casual", "Traditional", "Modern", "Athletic"],
-    "Social Status and Wealth": ["Wealthy", "Middle class", "Poor", "Noble", "Royalty"],
+    # Configure the canvas
+    canvas.configure(yscrollcommand=scrollbar.set)
+    canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
 
-}
+    # Create an inner frame inside the canvas
+    inner_frame = tk.Frame(canvas)
+    canvas.create_window((0, 0), window=inner_frame, anchor="nw")
 
-# Define the distinguishing features and their associated variables
-distinguishing_features_list = ["Scar", "Tattoo", "Freckles", "Birthmark"]
-distinguishing_features = {feature: IntVar() for feature in distinguishing_features_list}
+    labels = {
+        "Name": "text", "Full Name": "text", "Nicknames/Aliases": "text",
+        "Age & Birthdate": "date", "Zodiac Sign": "dropdown", "Place of Birth": "text",
+        "Current Residence": "text", "Height (in inches)": "text", "Weight (in pounds)": "text",
+        "Build": "dropdown", "Eye Color": "color", "Hair Color": "color",
+        "Distinguishing Features": "checkbox", "Style of Dress": "dropdown",
+        "Significant Physical Traits": "text", "Key Traits": "text",
+        "Fears and Phobias": "text", "Hobbies and Interests": "text",
+        "Habits or Behaviors": "text", "Strengths and Weaknesses": "text",
+        "Mythological Influences on Personality": "text", "Moral Alignment": "text",
+        "Communication Style": "text", "Family": "text", "Education and Training": "text",
+        "Key Past Events": "text", "Social Status and Wealth": "dropdown",
+        "Cultural Background & Mythological Lineage": "text",
+        "Powers Specific to Greek Mythology": "text", "Limitations and Costs": "text",
+        "Initial State": "text", "Evolution Throughout the Series": "text",
+        "Goals and Motivations": "text", "Conflicts": "text", "Resolution": "text",
+        "Ties to Mythological Themes": "text", "Destiny vs. Free Will": "text",
+        "Key Relationships": "text", "Nature of Relationships": "text",
+        "Changes Over Time": "text", "Mythological Alliances and Rivalries": "text",
+        "Mentor Figures": "text", "Important Dialogue Quotations": "text",
+        "Significant Moments or Scenes": "text", "Personal Belongings of Mythological Note": "text",
+        "Prophecies or Oracles": "text", "Symbolism": "text", "Future Plot Ideas": "text"
+        # Add other fields as needed
+    }
 
-entries = {}  # Dictionary to store the input fields
-color_labels = {}  # Dictionary to store the color labels
-color_values = {}  # Dictionary to store the color values
-date_entries = {}  # Dictionary to store the date entries
+    dropdown_options = {
+        "Zodiac Sign": ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+                        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"],
+        "Build": ["Slender", "Muscular", "Average", "Heavyset", "Athletic"],
+        "Style of Dress": ["Formal", "Casual", "Traditional", "Modern", "Athletic"],
+        "Social Status and Wealth": ["Wealthy", "Middle class", "Poor", "Noble", "Royalty"],
+    }
 
-# Create the input fields based on the labels and field types
-for label, field_type in labels.items():
-    tk.Label(inner_frame, text=label).pack()
-    if field_type == "text":
-        entry = tk.Entry(inner_frame, width=50)  # Adjust the width as needed
-        entry.pack(anchor=tk.CENTER)
-        entries[label] = entry
-    elif field_type == "dropdown":
-        combobox = ttk.Combobox(inner_frame, values=dropdown_options.get(label, []), width=47)  # Adjust the width
-        combobox.pack(anchor=tk.CENTER)
-        entries[label] = combobox
-    elif field_type == "color":
-        color_button = tk.Button(inner_frame, text=f"Choose {label}", 
-                                 command=lambda lbl=label: choose_color(lbl))
-        color_button.pack()
-        color_label = tk.Label(inner_frame, text="     ", bg="white", width=20)
-        color_label.pack()
-        color_labels[label] = color_label
-    elif field_type == "checkbox":
-        for feature, var in distinguishing_features.items():
-            cb = Checkbutton(inner_frame, text=feature, variable=var)
-            cb.pack()
-        entries[label] = distinguishing_features
-    elif field_type == "date":
-        year = ttk.Combobox(inner_frame, values=list(range(1900, datetime.datetime.now().year+1)))
-        month = ttk.Combobox(inner_frame, values=list(range(1, 13)))
-        day = ttk.Combobox(inner_frame, values=list(range(1, 32)))
-        year.pack()
-        month.pack()
-        day.pack()
-        date_entries[label] = (year, month, day)
+    # For Distinguishing Features
+    distinguishing_features_list = ["Scar", "Tattoo", "Freckles", "Birthmark"]
+    distinguishing_features = {feature: IntVar() for feature in distinguishing_features_list}
 
-# Create the submit button
-submit_button = tk.Button(inner_frame, text="Submit", command=on_submit)
-submit_button.pack()
+    entries = {}
+    color_labels = {}
+    color_values = {}
+    date_entries = {}  # Add this line to define date_entries
 
-root.mainloop()
+    for label, field_type in labels.items():
+        tk.Label(inner_frame, text=label).pack()
+        if field_type == "text":
+            entry = tk.Entry(inner_frame, width=50)  # Adjust the width as needed
+            entry.pack(anchor=tk.CENTER)
+            entries[label] = entry
+        elif field_type == "dropdown":
+            combobox = ttk.Combobox(inner_frame, values=dropdown_options.get(label, []), width=47)  # Adjust the width
+            combobox.pack(anchor=tk.CENTER)
+            entries[label] = combobox
+        elif field_type == "color":
+            color_button = tk.Button(inner_frame, text=f"Choose {label}",
+                                     command=lambda lbl=label: choose_color(lbl))
+            color_button.pack()
+            color_label = tk.Label(inner_frame, text="     ", bg="white", width=20)
+            color_label.pack()
+            color_labels[label] = color_label
+        elif field_type == "checkbox":
+            for feature, var in distinguishing_features.items():
+                cb = Checkbutton(inner_frame, text=feature, variable=var)
+                cb.pack()
+            entries[label] = distinguishing_features
+        elif field_type == "date":
+            year = ttk.Combobox(inner_frame, values=list(range(1900, datetime.datetime.now().year + 1)))
+            month = ttk.Combobox(inner_frame, values=list(range(1, 13)))
+            day = ttk.Combobox(inner_frame, values=list(range(1, 32)))
+            year.pack()
+            month.pack()
+            day.pack()
+            date_entries[label] = (year, month, day)
+
+    # Create a "Submit" button to export character profile to PDF
+    submit_button = tk.Button(parent_frame, text="Submit", command=on_submit)
+    submit_button.pack()
+    

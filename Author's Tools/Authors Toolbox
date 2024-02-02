@@ -1,73 +1,68 @@
 # Import necessary modules
 import tkinter as tk
+from tkinter import PhotoImage
 from tkinter import ttk
 from tkinter import Menu
 import webbrowser
-from character_creator_module import setup_character_creator  # Import the Character Creator module function
+import turtle
+from character_creator_module import setup_character_creator
+from book_hub_module import setup_book_hub
+from summarizer_module import setup_summarizer
 
 # Function to show the selected tab's content
-def show_tab(tab_frame, content_func):
+def show_tab(tab_frame, content_func=None):
     # Hide all tab frames
-    for frame in (homepage_frame, character_creator_frame, book_hub_frame):
+    for frame in (homepage_frame, character_creator_frame, book_hub_frame, summarizer_frame):
         frame.pack_forget()
     
     # Show the selected tab frame
     tab_frame.pack(fill=tk.BOTH, expand=True)
     
-    # Call the function to configure the tab's content
-    content_func()
+    # Call the function to configure the tab's content if provided
+    if content_func:
+        content_func(tab_frame)
 
-# Define functions to display module contents
-def character_creator_content():
-    # Clear the character_creator_frame
-    for widget in character_creator_frame.winfo_children():
+def summarizer_content(tab_frame):
+    # Clear the frame before setting it up again
+    for widget in tab_frame.winfo_children():
         widget.destroy()
 
-    # Create a canvas for the character_creator_frame
-    character_creator_canvas = tk.Canvas(character_creator_frame, height=400)
-    character_creator_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    setup_summarizer(tab_frame)
+        
+def character_creator_content(tab_frame):
+    # Clear the frame before setting it up again
+    for widget in tab_frame.winfo_children():
+        widget.destroy()
 
-    # Create a scrollbar for the character_creator_canvas
-    character_creator_scrollbar = ttk.Scrollbar(character_creator_frame, orient="vertical", command=character_creator_canvas.yview)
-    character_creator_scrollbar.pack(side=tk.RIGHT, fill="y")
+    # Call the setup_character_creator function to set up the frame again
+    setup_character_creator(tab_frame)
 
-    # Configure the canvas to scroll
-    character_creator_canvas.configure(yscrollcommand=character_creator_scrollbar.set)
-    character_creator_canvas_frame = tk.Frame(character_creator_canvas)
-    character_creator_canvas.create_window((0, 0), window=character_creator_canvas_frame, anchor="nw")
+def book_hub_content(tab_frame):
+    # Clear the book_hub_canvas_frame
+    for widget in book_hub_canvas_frame.winfo_children():
+        widget.destroy()
 
-    # Call the setup_character_creator function from the character_creator_module
-    character_creator_content = setup_character_creator(character_creator_canvas_frame)
+    # Call the setup_book_hub function for the book_hub_canvas_frame
+    setup_book_hub(book_hub_canvas_frame)
 
-    # Add the content to the canvas_frame
-    character_creator_canvas.create_window((0, 0), window=character_creator_content, anchor="nw")
-
-    # Function to configure the canvas scroll region
-    def configure_canvas(event):
-        character_creator_canvas.configure(scrollregion=character_creator_canvas.bbox("all"))
-    
-    character_creator_canvas.bind("<Configure>", configure_canvas)
-
-    # Create content for the character_creator_canvas_frame
-    content = tk.Label(character_creator_canvas_frame, text="Character Creator")
-    content.pack()
-
-    # Call the setup_character_creator function from the character_creator_module
-    setup_character_creator(character_creator_canvas_frame)
-
-def book_hub_content():
-    # Create content for the book_hub_frame
-    content = tk.Label(book_hub_frame, text=" Book Hub")
-    content.pack()
-
-def homepage_content():
+def homepage_content(tab_frame):
     # Clear the homepage_frame
-    for widget in homepage_frame.winfo_children():
+    for widget in tab_frame.winfo_children():
         widget.destroy()
     
-    # Create content for the homepage_frame (Placeholder content)
-    content = tk.Label(homepage_frame, text="Welcome to the Author's Toolbox!")
-    content.pack()
+    # Load the background image
+    background_image = PhotoImage(file=r"C:\Users\justi\Dropbox\Scrivener\Macros\Instruction Sets\Author's Toolbox\Images\Homepage.png")  # Update path as needed
+    
+    # Create a label to hold the background image
+    background_label = tk.Label(tab_frame, image=background_image)
+    background_label.place(x=0, y=0, relwidth=1, relheight=1)
+    
+    # Keep a reference to the image to prevent garbage collection
+    background_label.image = background_image
+    
+    # Create other content on top of the background
+    homepage_label = tk.Label(tab_frame, text="Welcome to the Author's Toolbox!", bg='white')
+    homepage_label.pack(pady=20)  # Adjust positioning as needed
 
 def close_application():
     # Close the application
@@ -91,6 +86,7 @@ def about():
 # Create the main application window
 root = tk.Tk()
 root.title("Author's Toolbox")
+root.geometry("800x600+300+120")
 
 # Create a Menu Bar
 menu_bar = Menu(root)
@@ -108,20 +104,25 @@ menu_bar.add_cascade(label="Help", menu=help_menu)
 
 # Create a Frame to hold the Notebook with tabs on the left
 frame = ttk.Frame(root)
-frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+frame.pack(side=tk.LEFT, fill=tk.Y, expand=False)
 
 # Create custom tab buttons on the left side
-homepage_button = tk.Button(frame, text="Homepage", command=lambda: show_tab(homepage_frame))
-character_creator_button = tk.Button(frame, text="Character Creator", command=lambda: show_tab(character_creator_frame))
-book_hub_button = tk.Button(frame, text="Book Hub", command=lambda: show_tab(book_hub_frame))
-homepage_button.pack(fill=tk.X)
-character_creator_button.pack(fill=tk.X)
-book_hub_button.pack(fill=tk.X)
+# Creating buttons with a specified width
+homepage_button = tk.Button(frame, text="Homepage", width=20, height=5, bg='blue', command=lambda: show_tab(homepage_frame, homepage_content))
+character_creator_button = tk.Button(frame, text="Character Creator", width=20, height=5, bg='blue', command=lambda: show_tab(character_creator_frame, character_creator_content))
+book_hub_button = tk.Button(frame, text="Book Hub", width=20, height=5, bg='blue', command=lambda: show_tab(book_hub_frame, book_hub_content))
+summarizer_button = tk.Button(frame, text="Summarizer", width=20, height=5, bg='blue', command=lambda: show_tab(summarizer_frame, summarizer_content))
+
+homepage_button.pack(anchor = 'nw')
+character_creator_button.pack(anchor = 'nw')
+book_hub_button.pack(anchor = 'nw')
+summarizer_button.pack(anchor = 'nw')
 
 # Create frames for the content of each tab
-homepage_frame = tk.Frame(root)
-character_creator_frame = tk.Frame(root)
-book_hub_frame = tk.Frame(root)
+homepage_frame = tk.Frame(root, bg='blue')
+character_creator_frame = tk.Frame(root, bg='blue')
+book_hub_frame = tk.Frame(root, bg='blue')
+summarizer_frame = tk.Frame(root, bg='blue')
 
 # Create a Canvas widget with a scrollbar for each tab
 homepage_canvas_frame = tk.Frame(homepage_frame)
@@ -141,10 +142,6 @@ homepage_canvas.bind("<Configure>", lambda event, canvas=homepage_canvas: canvas
 # Create a new frame to be the content of the canvas
 homepage_canvas_inner_frame = tk.Frame(homepage_canvas)
 homepage_canvas.create_window((0, 0), window=homepage_canvas_inner_frame, anchor="nw")
-
-# Add content to the canvas_frame here (Homepage tab)
-homepage_content = tk.Label(homepage_canvas_inner_frame, text="Welcome to the Author's Toolbox!")
-homepage_content.pack()
 
 # Create a Canvas widget for the Character Creator tab (similar to Homepage tab)
 character_creator_canvas = tk.Canvas(character_creator_frame, height=200)
@@ -166,14 +163,11 @@ book_hub_canvas.configure(yscrollcommand=book_hub_scrollbar.set)
 book_hub_canvas_frame = tk.Frame(book_hub_canvas)
 book_hub_canvas.create_window((0, 0), window=book_hub_canvas_frame, anchor="nw")
 
-# Add content to the canvas_frame here (Book Hub tab)
-book_hub_content()
-
 # Configure the canvas to scroll
 book_hub_canvas.bind("<Configure>", lambda event, canvas=book_hub_canvas: canvas.configure(scrollregion=canvas.bbox("all")))
 
 # Function to show the selected tab's content
-def show_tab(tab_frame):
+def show_tab(tab_frame, content_func=None):
     # Hide all tab frames
     homepage_frame.pack_forget()
     character_creator_frame.pack_forget()
@@ -182,8 +176,12 @@ def show_tab(tab_frame):
     # Show the selected tab frame
     tab_frame.pack(fill='both', expand=True)
 
+    # Call the function to configure the tab's content if provided
+    if content_func:
+        content_func(tab_frame)
+
 # Show the homepage frame first
-show_tab(homepage_frame)
+show_tab(homepage_frame, homepage_content)
 
 # Start the main application loop
 root.mainloop()

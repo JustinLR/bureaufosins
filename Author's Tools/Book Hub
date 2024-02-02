@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Sample data - replace with your actual book details
 books = [
-    {"title": "Book Title 1", "path": "path_or_url_1", "last_revised": datetime(2022, 1, 1), "info": "Summary of Book 1"},
+    {"title": "Origins of Sin - A Bureau of SIns Prequel", "path": r"C:\Users\justi\Dropbox\Scrivener\Bureau of Sins\0. Origins of Sin - A Bureau of SIns Prequel.scriv\0. Origins of Sin - A Bureau of SIns Prequel.scrivx", "last_revised": datetime(2022, 1, 1), "info": "Summary of Book 1"},
     {"title": "Book Title 2", "path": "path_or_url_2", "last_revised": datetime(2021, 6, 15), "info": "Summary of Book 2"},
     # Add more books here
 ]
@@ -49,16 +49,13 @@ def setup_book_hub(parent):
     sorting = ttk.Combobox(parent, values=sort_options, state="readonly")
     sorting.set("Sort By")
     sorting.bind("<<ComboboxSelected>>", lambda e: sort_books(parent, books, sorting.get()))
-    sorting.pack()
+    sorting.pack(fill=tk.X)  # Makes the combobox fill the frame horizontally
 
     # Search bar
     search_entry = tk.Entry(parent)
-    search_entry.pack()
+    search_entry.pack(fill=tk.X)
     search_button = tk.Button(parent, text="Search", command=lambda: on_search(parent, sorting, search_entry))
-    search_button.pack()
+    search_button.pack(fill=tk.X)
 
     # Initialize the interface with all books
     sort_books(parent, books, sorting.get())  # Call sort_books to display all books initially
-
-# Example usage in your main script:
-# book_hub_module.setup_book_hub(character_creator_frame)  # Add Book Hub to the character_creator_frame
