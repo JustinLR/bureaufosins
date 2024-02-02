@@ -24,7 +24,7 @@ Bureau of Sins is a comprehensive repository housing various authoring tools. Th
 
 ### Authors Toolbox
 
-The Author's Toolbox is a Python application designed to assist authors in their writing process. It provides various tools and features to help with character creation, book organization, and text summarization.
+The Author's Toolbox is designed to assist authors in their writing process. It provides various tools and features to help with character creation, book organization, and text summarization.
 
 ### Character Creator
 
@@ -32,7 +32,7 @@ The Character Creator tool is a powerful utility for generating detailed and eng
 
 ### Book Hub
 
-The Book Hub application is a Python program that allows users to organize and access their collection of books. It provides a user-friendly interface where users can view and search for books, sort them by different criteria, and open them for reading.
+Allows users to organize and access their collection of books. It provides a user-friendly interface where users can view and search for books, sort them by different criteria, and open them for reading.
 
 ### Summarizer
 
