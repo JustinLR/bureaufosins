@@ -1,0 +1,106 @@
+# ------------------------------------------------------------------------------
+# App Layout
+# ------------------------------------------------------------------------------
+Authors Toolbox Application
+│
+├── authors_toolbox/ (Application Root Directory)
+│   ├── .gitignore
+│   ├── docs/
+│   │   ├── tree_diagrams.md (Documentation on Application Structure)
+│   │   └── ...
+│   ├── gui/ (Graphical User Interfaces)
+│   │   ├── __init__.py
+│   │   ├── authors_toolbox_gui.py (Main Application Window GUI)
+│   │   ├── summarizer_gui.py (GUI for Summarizer Tool)
+│   │   ├── book_hub_gui.py (GUI for Book Hub Tool)
+│   │   ├── character_creator_gui.py (GUI for Character Creator Tool)
+│   │   └── settings_gui.py (GUI for Settings/Configuration Management)
+│   ├── text/ (Logic Components)
+│   │   ├── __init__.py
+│   │   ├── authors_toolbox_text.py (Main Application Logic)
+│   │   ├── summarizer_text.py (Logic for Text Summarization Operations)
+│   │   ├── book_hub_text.py (Logic for Managing Book Data and Operations)
+│   │   ├── character_creator_text.py (Logic for Character Data and Creation)
+│   │   └── settings_text.py (Logic for Settings/Configuration Management)
+│   ├── resources/ (Application Resources)
+│   │   ├── __init__.py
+│   │   ├── icons/
+│   │   └── config.ini (Configuration File)
+│   ├── tests/ (Testing)
+│   │   ├── __init__.py
+│   │   ├── test_summarizer_text.py
+│   │   ├── test_book_hub_text.py
+│   │   └── test_character_creator_text.py
+│   ├── utils/ (Utility Functions)
+│   │   ├── __init__.py
+│   │   └── common_utils.py
+│   ├── main.py (Entry Point of the Application)
+│   ├── authors_toolbox.spec (Application Specification)
+│   ├── .vscode (VS Code Configuration)
+│   └── _pycache_, build, dist (Compiled Files and Build Directories)
+│
+├── Tools (Functional Components)
+│   ├── Summarizer (Summarizer Tool)
+│   │   ├── GUI (summarizer_gui.py)
+│   │   └── Logic (summarizer_text.py)
+│   ├── Book Hub (Book Hub Tool)
+│   │   ├── GUI (book_hub_gui.py)
+│   │   └── Logic (book_hub_text.py)
+│   └── Character Creator (Character Creator Tool)
+│       ├── GUI (character_creator_gui.py)
+│       └── Logic (character_creator_text.py)
+│
+└── Settings/Configuration Management (Settings and Configuration)
+    ├── GUI (settings_gui.py)
+    └── Logic (settings_text.py)
+# ------------------------------------------------------------------------------
+# Dev Path
+# ------------------------------------------------------------------------------
+Authors Toolbox Application
+│
+├── Core Framework and Application Shell
+│   ├── Main Application Window
+│   └── Application Main Loop
+│
+├── Menu System and Navigation
+│   ├── Menu Bar
+│   │   ├── File Menu
+│   │   └── Tools Menu
+│   │       ├── Authors Toolbox
+│   │       ├── Summarizer
+│   │       ├── Book Hub
+│   │       └── Character Creator
+│   └── Navigation Logic
+│
+├── Settings and Configuration Management
+│   ├── Settings Window
+│   └── Configuration Handling
+│       ├── Load Configuration
+│       └── Save Configuration
+│
+├── Encryption for Sensitive Information
+│   ├── Encryption Logic
+│   │   ├── Encrypt Message
+│   │   └── Decrypt Message
+│   └── Key Management
+│
+├── Individual Tools Integration
+│   ├── Summarizer
+│   │   ├── Summarizer GUI
+│   │   └── Summarizer Logic
+│   ├── Book Hub
+│   │   ├── Book Hub GUI
+│   │   └── Book Hub Logic
+│   └── Character Creator
+│       ├── Character Creator GUI
+│       └── Character Creator Logic
+│
+├── Integration and Testing
+│   ├── Integrate Tools with Main Application
+│   └── Conduct Testing
+│       ├── Unit Tests
+│       └── Integration Tests
+│
+└── Refinement and User Experience Enhancements
+    ├── UI/UX Optimization
+    └── User Testing and Feedback
