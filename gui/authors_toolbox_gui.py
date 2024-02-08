@@ -88,7 +88,6 @@ class MainLayout(Screen):
         """Closes the application."""
         App.get_running_app().stop()
 
-# The Kivy App
 class AuthorsToolboxApp(App):
     """The main Kivy application class."""
     def build(self):
