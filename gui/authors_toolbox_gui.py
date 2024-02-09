@@ -28,14 +28,13 @@ class MainLayout(Screen):
     """Main application layout hosting the navigation and screen manager."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.orientation = 'horizontal'
 
         # Root layout configuration
         root_layout = BoxLayout(orientation='horizontal')
         self.add_widget(root_layout)
          
         # Side bar for navigation between screens
-        left_bar = BoxLayout(orientation='vertical', size_hint_x=None, width=200)  # Navigation bar
+        left_bar = BoxLayout(orientation='vertical', size_hint_x=None, width=200)
         root_layout.add_widget(left_bar)
         
         # Navigation buttons for each application screen
@@ -102,9 +101,5 @@ class AuthorsToolboxApp(App):
         return False
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     # Starting the Kivy application
     AuthorsToolboxApp().run()
-=======
-    AuthorsToolboxApp().run()
->>>>>>> 708f03d (Updating Repo)
