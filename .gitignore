@@ -15,6 +15,10 @@ dist/
 # PyInstaller
 *.spec
 
+# Log files
+*.log
+/logs/
+
 # Development environments
 .vscode/
 .env

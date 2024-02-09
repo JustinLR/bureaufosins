@@ -102,5 +102,9 @@ class AuthorsToolboxApp(App):
         return False
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     # Starting the Kivy application
     AuthorsToolboxApp().run()
+=======
+    AuthorsToolboxApp().run()
+>>>>>>> 708f03d (Updating Repo)
