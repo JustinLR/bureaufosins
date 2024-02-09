@@ -1,4 +1,4 @@
-![Bureau of Sins Logo](https://github.com/JustinLR/bureaufosins/blob/main/Untitled%20(4).png)
+![Bureau of Sins Logo](https://github.com/JustinLR/bureaufosins/blob/main/resources/Images/Untitled%20(4).png)
 
 
 Welcome to Bureau of Sins, your repository for a collection of powerful authoring tools designed to streamline your creative process. Whether you're creating characters, managing book projects, summarizing content, or using any of our other tools, Bureau of Sins has what you need.
