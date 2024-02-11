@@ -52,18 +52,12 @@ class FileChooser(Popup):
         filechooser.bind(on_submit=self.selected)
 
     def selected(self, filechooser, selection, touch):
-        """Handles the selection of a file and updates the books list."""
+        """Handles the selection of a file and prints its path."""
         if selection:
             # Handle the selected file path. E.g., update the book's path in your data
-            new_book = {'id': len(books) + 1, 'title': 'New Book', 'summary': 'Summary', 'image_path': selection[0]}
-            books.append(new_book)
             print("Selected path:", selection[0])
             self.dismiss()
-            # Update the main screen with the new book entry
-            app = App.get_running_app()
-            main_screen = app.root.book_layout('main_screen')
-            main_screen.add_book(new_book)  # Call the add_book method in the main screen
-
+            
 # Sample data representing books in the application
 books = [
     {'id': 1, 'title': 'Book Title 1', 'summary': 'Summary 1', 'image_path': 'path/to/image1.png'},
@@ -107,7 +101,6 @@ class EditBooksPopup(Popup):
         """Placeholder for the book editing functionality."""
         print(f"Edit book with ID: {book_id}")
         self.dismiss()
-
 
 class BookHubScreen(Screen):
     """Main screen for displaying and managing books."""
