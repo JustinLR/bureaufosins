@@ -7,7 +7,7 @@ Config.set('graphics', 'width', '1024')
 Config.set('graphics', 'height', '768')
 # Set the default height of the application window.
 
-from gui.authors_toolbox_gui import AuthorsToolboxApp
+from source.authorstoolbox import AuthorsToolboxApp
 # Import the main application class. Ensure this import comes after setting configurations to ensure they take effect.
 
 # Define a main function as the entry point of the application.

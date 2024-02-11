@@ -8,10 +8,10 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
 
 # Importing custom screens for different functionalities
-from gui.summarizer_gui import SummarizerScreen
-from gui.book_hub_gui import BookHubScreen
-from gui.character_creator_gui import CharacterCreatorScreen
-from gui.settings_gui import SettingsScreen
+from source.summarizer import SummarizerScreen
+from source.bookhub import BookHubScreen
+from source.charactercreator import CharacterCreatorScreen
+from source.settings import SettingsScreen
 
 class HomepageScreen(Screen):
     """Defines the homepage screen layout and components."""
@@ -99,7 +99,3 @@ class AuthorsToolboxApp(App):
         # Implement confirmation dialog or cleanup here if necessary
         print("Exit requested.")
         return False
-
-if __name__ == '__main__':
-    # Starting the Kivy application
-    AuthorsToolboxApp().run()
